@@ -42,13 +42,13 @@ function ScriptConf {
 
 $ConfNameFileLoc = "$PROFILE"
 $Content = @"
-Write-Host "oh-my-posh init pwsh --config `'$env:POSH_THEMES_PATH\clean-detailed.omp.json`'" | Invoke-Expression
+oh-my-posh init pwsh --config `'$env:POSH_THEMES_PATH\clean-detailed.omp.json`' | Invoke-Expression
 Import-Module -Name Terminal-Icons
 winfetch
 
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView"
+Set-PSReadLineOption -PredictionViewStyle ListView
 "@
 
 ScriptConf -ConfNameFileLoc $ConfNameFileLoc -Content $Content

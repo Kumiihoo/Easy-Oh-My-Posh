@@ -48,7 +48,7 @@ winfetch
 
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView
+Set-PSReadLineOption -PredictionViewStyle ListView"
 "@
 
 ScriptConf -ConfNameFileLoc $ConfNameFileLoc -Content $Content

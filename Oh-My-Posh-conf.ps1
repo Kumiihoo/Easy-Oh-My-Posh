@@ -20,7 +20,7 @@ function ScriptConf {
 
 $ConfNameFileLoc = "$PROFILE.Microsoft.PowerShell_profile.ps1"
 $Content = @"
-Write-Host "oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/clean-detailed.omp.json" | Invoke-Expression
+Write-Host "oh-my-posh init pwsh --config '$env:POSH_THEMES_PATH/clean-detailed.omp.json' | Invoke-Expression
 Import-Module -Name Terminal-Icons
 winfetch
 

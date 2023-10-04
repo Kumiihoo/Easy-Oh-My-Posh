@@ -1,3 +1,25 @@
+$packageName = "JanDeDobbeleer.OhMyPosh"
+$isInstalled = (winget list | Select-String $packageName)
+
+if ($isInstalled) {
+    Write-Host "JanDeDobbeleer.OhMyPosh está instalado en tu sistema."
+} else {
+    Write-Host "JanDeDobbeleer.OhMyPosh no está instalado en tu sistema. Se procederá a la instalación..."
+
+    $install = "winget install JanDeDobbeleer.OhMyPosh -s winget"
+
+    Invoke-Expression -Command $install
+
+    # Verify Installation
+    $sucessInstallation = (winget list | Select-String $packageName)
+
+    if ($sucessInstallation) {
+        Write-Host "JanDeDobbeleer.OhMyPosh se ha instalado correctamente."
+    } else {
+        Write-Host "No se pudo instalar JanDeDobbeleer.OhMyPosh. Comprueba tu configuración de 'winget' y los permisos de instalación."
+    }
+}
+
 function ScriptConf {
     param(
         [string]$ConfNameFileLoc,

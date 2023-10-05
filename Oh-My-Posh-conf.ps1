@@ -1,5 +1,5 @@
-$packageName = "JanDeDobbeleer.OhMyPosh"
-$isInstalled = (winget list | Select-String $packageName)
+$OhMyPosh = "JanDeDobbeleer.OhMyPosh"
+$isInstalled = (winget list | Select-String $OhMyPosh)
 
 if ($isInstalled) {
     Write-Host "Oh My Posh está instalado en tu sistema."
@@ -10,8 +10,14 @@ if ($isInstalled) {
 
     Invoke-Expression -Command "winget install JanDeDobbeleer.OhMyPosh -s winget"
 
+    Invoke-Expression -Command "Get-PoshThemes"
+
+    Invoke-Expression -Command "Install-Module -Name Terminal-Icons -Repository PSGallery"
+
+    Invoke-Expression -Command "Install-Script winfetch"
+
     # Verify Installation
-    $sucessInstallation = (winget list | Select-String $packageName)
+    $sucessInstallation = (winget list | Select-String $OhMyPosh)
 
     if ($sucessInstallation) {
         Write-Host "JanDeDobbeleer.OhMyPosh se ha instalado correctamente."

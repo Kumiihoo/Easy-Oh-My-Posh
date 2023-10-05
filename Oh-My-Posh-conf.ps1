@@ -1,29 +1,43 @@
 $OhMyPosh = "JanDeDobbeleer.OhMyPosh"
-$isInstalled = (winget list | Select-String $OhMyPosh)
 
-if ($isInstalled) {
+if (winget list | Select-String $OhMyPosh) {
     Write-Host "Oh My Posh está instalado en tu sistema."
-} else {
+}
+else {
     Write-Host "Oh My Posh no está instalado en tu sistema. Se procederá a la instalación..."
     
     Invoke-Expression -Command "winget update"
 
     Invoke-Expression -Command "winget install JanDeDobbeleer.OhMyPosh -s winget"
 
-    Invoke-Expression -Command "Get-PoshThemes"
+    $previousInstallationRunning = Get-Process | Where-Object { $_.ProcessName -eq "winget" }
 
-    Invoke-Expression -Command "Install-Module -Name Terminal-Icons -Repository PSGallery"
-
-    Invoke-Expression -Command "Install-Script winfetch"
+    if ($previousInstallationRunning) {
+        Write-Host "Esperando a que la instalación previa termine..."
+        $previousInstallationRunning.WaitForExit()
+    }
 
     # Verify Installation
     $sucessInstallation = (winget list | Select-String $OhMyPosh)
 
     if ($sucessInstallation) {
-        Write-Host "JanDeDobbeleer.OhMyPosh se ha instalado correctamente."
-    } else {
-        Write-Host "No se pudo instalar JanDeDobbeleer.OhMyPosh. Comprueba tu configuración de 'winget' y los permisos de instalación."
+        Write-Host "Oh My Posh se ha instalado correctamente."
     }
+    else {
+        Write-Host "No se pudo instalar Oh My Posh. Comprueba tu configuración de 'winget' y los permisos de instalación."
+    }
+
+    Invoke-Expression -Command "Get-PoshThemes"
+
+    if (Get-Module -Name "Terminal-Icons" -ListAvailable) {
+        Write-Host "Terminal-Icons ya está instalado en tu sistema."
+    }
+    else {
+        Write-Host "Terminal-Icons no está instalado en tu sistema. Se procederá a la instalación."
+        Invoke-Expression -Command "Install-Module -Name Terminal-Icons -Repository PSGallery"
+    }
+
+    Invoke-Expression -Command "Install-Script winfetch"
 }
 
 function ScriptConf {

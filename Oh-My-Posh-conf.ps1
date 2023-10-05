@@ -79,17 +79,7 @@ else {
         Write-Host "No se pudo instalar Oh My Posh. Comprueba tu configuración de 'winget' y los permisos de instalación."
         Exit
     }
-
-    # Restart PowerShell and continue execution
-    Write-Host "Restarting PowerShell and continuing script execution..."
-    # Open a new Windows Terminal window and continue the script
-    Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -File `"$PSCommandPath`""
-    # Exit the current PowerShell session
-    exit
 }
-
-
-Invoke-Expression -Command "Get-PoshThemes"
 
 if (Get-Module -Name "Terminal-Icons" -ListAvailable) {
     Write-Host "Terminal-Icons ya está instalado en tu sistema."
@@ -100,6 +90,13 @@ else {
 }
 
 Invoke-Expression -Command "Install-Script winfetch"
+
+# Restart PowerShell and continue execution
+Write-Host "Reiniciando PowerShell y finalizando la configuración..."
+# Open a new Windows Terminal window
+Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -Command Get-PoshThemes"
+# Exit the current PowerShell session
+Exit
 
 function ScriptConf {
     param(

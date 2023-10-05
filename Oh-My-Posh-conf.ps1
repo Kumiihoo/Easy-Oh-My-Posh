@@ -2,11 +2,11 @@ $packageName = "JanDeDobbeleer.OhMyPosh"
 $isInstalled = (winget list | Select-String $packageName)
 
 if ($isInstalled) {
-    Write-Host "JanDeDobbeleer.OhMyPosh está instalado en tu sistema."
+    Write-Host "Oh My Posh está instalado en tu sistema."
 } else {
-    Write-Host "JanDeDobbeleer.OhMyPosh no está instalado en tu sistema. Se procederá a la instalación..."
+    Write-Host "Oh My Posh no está instalado en tu sistema. Se procederá a la instalación..."
 
-    $install = "winget install JanDeDobbeleer.OhMyPosh -s winget"
+    $install = "winget install JanDeDobbeleer.OhMyPosh"
 
     Invoke-Expression -Command $install
 

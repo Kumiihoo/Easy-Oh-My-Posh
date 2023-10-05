@@ -2,17 +2,7 @@ $OhMyPosh = "JanDeDobbeleer.OhMyPosh"
 $PShell = "Microsoft.PowerShell"
 $Terminal = "Microsoft.WindowsTerminal"
 
-if (winget list | Select-String $Terminal) {
-    Write-Host "Windows Terminal ya está instalado en tu sistema."
-    # Comando para abrir una nueva ventana de Windows Terminal y ejecutar el script en ella
-    $commandToRun = "wt -p `"$PSCommandPath`""
-
-    # Ejecutar el comando para abrir la nueva ventana de Windows Terminal
-    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoExit -Command $commandToRun"
-    # Exit the current PowerShell session
-    exit
-}
-else {
+if(!(Test-Path -Path "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal*")){
     Write-Host "Windows Terminal no está instalado en tu sistema. Se procederá a la instalación..."
     
     Invoke-Expression -Command "winget update -y"
@@ -31,20 +21,13 @@ else {
 
     if ($sucessInstallation) {
         Write-Host "Windows Terminal se ha instalado correctamente."
-        # Open a new Windows Terminal window and continue the script
-        Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -File `"$PSCommandPath`""
-        # Exit the current PowerShell session
-        exit
     }
     else {
         Write-Host "No se pudo instalar Windows Terminal Comprueba tu configuración de 'winget' y los permisos de instalación."
     }
 }
 
-if (winget list | Select-String $PShell) {
-    Write-Host "PowerShell ya está instalado en tu sistema."
-}
-else {
+if (!(winget list | Select-String $PShell)) {
     Write-Host "PowerShell no está instalado en tu sistema. Se procederá a la instalación..."
     
     Invoke-Expression -Command "winget update"
@@ -100,6 +83,7 @@ else {
     }
     else {
         Write-Host "No se pudo instalar Oh My Posh. Comprueba tu configuración de 'winget' y los permisos de instalación."
+        Exit
     }
 }
 

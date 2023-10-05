@@ -5,10 +5,10 @@ if ($isInstalled) {
     Write-Host "Oh My Posh está instalado en tu sistema."
 } else {
     Write-Host "Oh My Posh no está instalado en tu sistema. Se procederá a la instalación..."
+    
+    Invoke-Expression -Command "winget update"
 
-    $install = "winget install JanDeDobbeleer.OhMyPosh"
-
-    Invoke-Expression -Command $install
+    Invoke-Expression -Command "winget install JanDeDobbeleer.OhMyPosh -s winget"
 
     # Verify Installation
     $sucessInstallation = (winget list | Select-String $packageName)

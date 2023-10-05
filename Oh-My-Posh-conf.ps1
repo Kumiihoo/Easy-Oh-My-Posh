@@ -22,6 +22,9 @@ else {
 
     if ($sucessInstallation) {
         Write-Host "Oh My Posh se ha instalado correctamente."
+        # Restart PowerShell and continue execution
+        Write-Host "Restarting PowerShell and continuing script execution..."
+        powershell.exe -NoProfile -ExecutionPolicy Bypass -File $MyInvocation.ScriptName
     }
     else {
         Write-Host "No se pudo instalar Oh My Posh. Comprueba tu configuración de 'winget' y los permisos de instalación."

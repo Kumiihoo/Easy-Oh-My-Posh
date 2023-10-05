@@ -4,8 +4,11 @@ $Terminal = "Microsoft.WindowsTerminal"
 
 if (winget list | Select-String $Terminal) {
     Write-Host "Windows Terminal ya está instalado en tu sistema."
-    # Open a new Windows Terminal window and continue the script
-    Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -File `"$PSCommandPath`""
+    # Comando para abrir una nueva ventana de Windows Terminal y ejecutar el script en ella
+    $commandToRun = "wt -p `"$PSCommandPath`""
+
+    # Ejecutar el comando para abrir la nueva ventana de Windows Terminal
+    Start-Process -FilePath "powershell.exe" -ArgumentList "-NoExit -Command $commandToRun"
     # Exit the current PowerShell session
     exit
 }

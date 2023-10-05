@@ -2,7 +2,7 @@ $OhMyPosh = "JanDeDobbeleer.OhMyPosh"
 $PShell = "Microsoft.PowerShell"
 $Terminal = "Microsoft.WindowsTerminal"
 
-if(!(Test-Path -Path "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal*")){
+if (!(Test-Path -Path "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal*")) {
     Write-Host "Windows Terminal no está instalado en tu sistema. Se procederá a la instalación..."
     
     Invoke-Expression -Command "winget update -y"
@@ -74,18 +74,20 @@ else {
 
     if ($sucessInstallation) {
         Write-Host "Oh My Posh se ha instalado correctamente."
-        # Restart PowerShell and continue execution
-        Write-Host "Restarting PowerShell and continuing script execution..."
-        # Open a new Windows Terminal window and continue the script
-        Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -File `"$PSCommandPath`""
-        # Exit the current PowerShell session
-        exit
     }
     else {
         Write-Host "No se pudo instalar Oh My Posh. Comprueba tu configuración de 'winget' y los permisos de instalación."
         Exit
     }
+
+    # Restart PowerShell and continue execution
+    Write-Host "Restarting PowerShell and continuing script execution..."
+    # Open a new Windows Terminal window and continue the script
+    Start-Process -FilePath "wt" -ArgumentList "pwsh.exe -NoExit -File `"$PSCommandPath`""
+    # Exit the current PowerShell session
+    exit
 }
+
 
 Invoke-Expression -Command "Get-PoshThemes"
 

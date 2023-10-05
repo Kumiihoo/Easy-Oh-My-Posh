@@ -34,8 +34,7 @@ function ScriptConf {
     }
     else {
         # Create a new profile
-        New-Item -ItemType Directory -Path $PROFILE
-        New-Item -ItemType File -Path $PROFILE
+        New-Item -ItemType File -Path $PROFILE -Force
         Set-Content -Path $ConfNameFileLoc -Value $Content
         Write-Host "Se ha creado el archivo: $ConfNameFileLoc"
     }

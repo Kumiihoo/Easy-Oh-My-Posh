@@ -2,6 +2,9 @@ $OhMyPosh = "JanDeDobbeleer.OhMyPosh"
 $PShell = "Microsoft.PowerShell"
 $Terminal = "Microsoft.WindowsTerminal"
 
+# Set the environment variable to accept the terms and conditions
+$env:ACCEPT_WINGET_INSTALLER_PROMPTS = "yes"
+
 if (!(Test-Path -Path "C:\Program Files\WindowsApps\Microsoft.WindowsTerminal*")) {
     Write-Host "Windows Terminal no está instalado en tu sistema. Se procederá a la instalación..."
     
